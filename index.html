@@ -3,23 +3,270 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Oracle Procurement AI Assistant</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Oracle Procurement AI Assistant – NL to SQL for Oracle EBS</title>
+  <meta name="description" content="Ask procurement questions in plain English. 
+  Get Oracle SQL instantly. Free guided setup for Oracle EBS environments.">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0f1117;
+      color: #e2e8f0;
+      line-height: 1.7;
+    }
+
+    .banner {
+      background: #1a56db;
+      text-align: center;
+      padding: 10px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .banner a {
+      color: #fff;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .hero {
+      max-width: 820px;
+      margin: 60px auto 40px;
+      padding: 0 24px;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #1e2a3a;
+      border: 1px solid #2d4a6e;
+      color: #60a5fa;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 700;
+      color: #f8fafc;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    h1 span { color: #60a5fa; }
+
+    .hero p {
+      font-size: 18px;
+      color: #94a3b8;
+      max-width: 600px;
+      margin: 0 auto 32px;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .btn-primary {
+      background: #1a56db;
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: #1e40af; }
+
+    .cta-note {
+      font-size: 13px;
+      color: #64748b;
+    }
+
+    .container {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 12px;
+      border: 1px solid #1e2a3a;
+      margin: 40px 0;
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+    }
+
+    h2 {
+      font-size: 22px;
+      font-weight: 600;
+      color: #f1f5f9;
+      margin: 48px 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #1e2a3a;
+    }
+
+    .card {
+      background: #161b27;
+      border: 1px solid #1e2a3a;
+      border-radius: 10px;
+      padding: 24px 28px;
+      margin-bottom: 16px;
+    }
+
+    .card ul {
+      padding-left: 20px;
+    }
+    .card ul li {
+      margin-bottom: 8px;
+      color: #cbd5e1;
+    }
+    .card p { color: #94a3b8; margin-bottom: 12px; }
+    .card p:last-child { margin-bottom: 0; }
+
+    .query-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .query-item {
+      background: #0f1117;
+      border: 1px solid #1e3a5f;
+      border-left: 3px solid #1a56db;
+      border-radius: 6px;
+      padding: 12px 16px;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      color: #93c5fd;
+    }
+
+    .security-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 4px;
+    }
+
+    .security-item {
+      background: #0f1f0f;
+      border: 1px solid #1a3a1a;
+      border-radius: 8px;
+      padding: 18px;
+    }
+
+    .security-item .icon { font-size: 22px; margin-bottom: 8px; }
+    .security-item strong {
+      display: block;
+      color: #86efac;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+    .security-item p {
+      font-size: 13px;
+      color: #6b7280;
+      margin: 0;
+    }
+
+    .steps {
+      counter-reset: step;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      counter-increment: step;
+      background: #1a56db;
+      color: white;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .step-text strong {
+      display: block;
+      color: #e2e8f0;
+      margin-bottom: 2px;
+    }
+
+    .step-text span { font-size: 14px; color: #64748b; }
+
+    .footer {
+      text-align: center;
+      padding: 32px 0 16px;
+      color: #475569;
+      font-size: 13px;
+      border-top: 1px solid #1e2a3a;
+      margin-top: 60px;
+    }
+  </style>
 </head>
 
 <body>
 
+  <div class="banner">
+    🚀 Currently accepting early access users —
+    <a href="https://calendly.com/dogu77/oracle-ai-assistant-free-setup-session" target="_blank">
+      Book a free 20-min setup session
+    </a>
+  </div>
+
+  <div class="hero">
+    <div class="badge">Early Access · Free Setup</div>
+    <h1>
+      Ask Oracle Procurement<br>
+      Questions in <span>Plain English</span>
+    </h1>
+    <p>
+      Type a business question. Get Oracle EBS SQL instantly.
+      Connected to your own database — your data never leaves your network.
+    </p>
+    <div class="cta-group">
+      <a
+        href="https://calendly.com/dogu77/oracle-ai-assistant-free-setup-session"
+        target="_blank"
+        class="btn-primary">
+        📅 Book Free Setup (20 min)
+      </a>
+    </div>
+    <p class="cta-note">No credit card. No commitment. Test on your UAT environment.</p>
+  </div>
+
   <div class="container">
 
-    <h1>Oracle Procurement AI</h1>
-
-    <p>
-      An AI-powered desktop assistant that converts plain English procurement 
-      and purchase order questions into optimized, executable Oracle SQL queries.
-    </p>
-
     <div class="video-container">
-      <!-- Verbatim reference to the demonstration file: ab70f9c4f4ba4ea982a6f1f3d0fc150a.mp4 -->
       <iframe
         src="https://www.loom.com/embed/ab70f9c4f4ba4ea982a6f1f3d0fc150a"
         frameborder="0"
@@ -30,70 +277,106 @@
     </div>
 
     <h2>Example Procurement Questions</h2>
-
     <div class="card">
-      <ul>
-        <li>How much have we spent so far this year?</li>
-        <li>Which vendors are costing us the most money last year?</li>
-        <li>How is our spend distributed across different currencies for 2025?</li>
-        <li>Is our monthly spend growing or shrinking from 2024 to 2025?</li>
-        <li>Top 5 vendors working with at least 3 currencies</li>
-        <li>Best 2 vendors for each currency</li>
-        <li>Highest rejected PO months</li>
-      </ul>
+      <div class="query-list">
+        <div class="query-item">"How much have we spent so far this year?"</div>
+        <div class="query-item">"Which vendors are costing us the most money last year?"</div>
+        <div class="query-item">"How is our spend distributed across currencies for 2025?"</div>
+        <div class="query-item">"Is our monthly spend growing or shrinking from 2024 to 2025?"</div>
+        <div class="query-item">"Top 5 vendors working with at least 3 currencies"</div>
+        <div class="query-item">"Best 2 vendors for each currency"</div>
+        <div class="query-item">"Which months had the highest rejected POs?"</div>
+      </div>
     </div>
 
     <h2>How It Works</h2>
-
     <div class="card">
-      <p>
-        This lightweight desktop application (`.exe`) uses advanced AI reasoning to:
-      </p>
-
-      <ul>
-        <li>Understand supply chain and purchase order questions in plain English</li>
-        <li>Generate complex Oracle EBS SQL queries dynamically</li>
-        <li>Execute queries locally via Oracle Client connection</li>
-        <li>Return formatted analytics, insights, and instantly exportable results</li>
-      </ul>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-text">
+            <strong>Ask a question in plain English</strong>
+            <span>Type any procurement or PO question — no SQL knowledge needed</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-text">
+            <strong>AI generates Oracle EBS SQL</strong>
+            <span>The AI engine builds a complex, optimized Oracle SQL query</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-text">
+            <strong>Executes locally against your database</strong>
+            <span>Connects via your Oracle Client — query runs inside your network</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-text">
+            <strong>Results returned instantly</strong>
+            <span>Formatted table output, ready to analyze or export</span>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <h2>Enterprise Security & Privacy First</h2>
-
-    <div class="card">
-      <p>Designed strictly around enterprise compliance and database protection safety boundaries:</p>
-      <ul>
-        <li><strong>Strictly Read-Only:</strong> Connects using a dedicated database user with restricted privileges. It cannot modify data or alter underlying ledger tables.</li>
-        <li><strong>Local Data Execution:</strong> Your actual financial and vendor data never leaves your network. The AI engine only structures the SQL syntax; the data execution happens entirely inside your local network session.</li>
-        <li><strong>Sandbox Safe:</strong> Zero impact on production. Ideal for testing safely on your UAT, QA, or Oracle VISION demo environments.</li>
-      </ul>
+    <h2>Enterprise Security & Privacy</h2>
+    <div class="security-grid">
+      <div class="security-item">
+        <div class="icon">🔒</div>
+        <strong>Strictly Read-Only</strong>
+        <p>Dedicated DB user with SELECT privileges only. Cannot modify any data.</p>
+      </div>
+      <div class="security-item">
+        <div class="icon">🏢</div>
+        <strong>Data Stays Local</strong>
+        <p>Your financial data never leaves your network. AI only builds the SQL syntax.</p>
+      </div>
+      <div class="security-item">
+        <div class="icon">🧪</div>
+        <strong>Sandbox Safe</strong>
+        <p>Zero production impact. Test safely on UAT, QA, or Oracle VISION environments.</p>
+      </div>
     </div>
 
     <h2>Get a Free Guided Setup</h2>
-
     <div class="card">
       <p>
-        Want to test this assistant against your own testing scenarios? Let's jump on a quick Teams call and I will handle the entire configuration for you. 
+        You share your screen. I handle the entire configuration.
+        Takes around <strong style="color:#f1f5f9">20 minutes</strong>.
+        You stay in full control the entire time.
       </p>
-      <p>
-        You retain full control, share your screen, and run the desktop app locally on your test machine. 
-      </p>
-      <p>
-        <strong>Prerequisites:</strong> Access to an Oracle EBS test environment and standard Oracle Client configuration.
-      </p>
+      <p><strong style="color:#f1f5f9">Prerequisites:</strong></p>
+      <ul>
+        <li>Access to an Oracle EBS test or UAT environment</li>
+        <li>Oracle Client already configured on your machine</li>
+        <li>Read-only DB user (I can guide you through creating one)</li>
+      </ul>
+      <br>
+      <a
+        href="https://calendly.com/dogu77/oracle-ai-assistant-free-setup-session"
+        target="_blank"
+        class="btn-primary"
+        style="display:inline-block; text-decoration:none">
+        📅 Schedule Free Setup
+      </a>
     </div>
 
-    <h2>Contact & Collaboration</h2>
-
+    <h2>Contact</h2>
     <div class="card">
-      <p>Reach out to schedule a free trial setup session, request features, or share feedback:</p>
+      <p>Questions, feedback, or feature requests — reach out directly:</p>
       <p>
-        Email: <a href="mailto:dogu77@gmail.com">dogu77@gmail.com</a>
+        📧 <a href="mailto:dogu77@gmail.com" style="color:#60a5fa">
+          dogu77@gmail.com
+        </a>
       </p>
     </div>
 
     <div class="footer">
-      Built using Oracle SQL + AI-Powered Query Generation.
+      Built on Oracle SQL · AI Query Generation · Early Access 2026
     </div>
 
   </div>
